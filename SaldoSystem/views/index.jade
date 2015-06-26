@@ -1,0 +1,23 @@
+﻿extends layout
+
+block content
+  .jumbotron
+    div.container 
+        div.row.centered-form
+            div.col-xs-12.col-sm-8.col-md-4.col-sm-offset-2.col-md-offset-4
+                div.panel.panel-default
+                    div.panel-heading
+                        h3.panel-title Login Saldosystem
+                    div.panel-body
+                        form(role="form")
+                            div.row
+                                div.col-xs-6.col-sm-6.col-md-6
+                                    div.form-group
+                                        input#user_name.form-control.input-sm(type="text", name="user_name", placeholder="Username..")
+                                div.col-xs-6.col-sm-6.col-md-6
+                                    div.form-group
+                                        input#password.form-control.input-sm(type="text", name="password", placeholder="Password..")
+                            input.btn.btn-info.btn-block(type="submit", value="Login")
+
+
+    

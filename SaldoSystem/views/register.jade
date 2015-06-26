@@ -1,0 +1,42 @@
+﻿extends layout
+
+block content
+
+    .jumbotron
+        div.container 
+            div.row.centered-form
+                div.col-xs-12.col-sm-8.col-md-4.col-sm-offset-2.col-md-offset-4
+                    div.panel.panel-default
+                        div.panel-heading
+                            h3.panel-title Register for Kodmården Saldosystem
+                        div.panel-body
+                            form(role="form")
+                                div.row
+                                    div.col-xs-6.col-sm-6.col-md-6
+                                        div.form-group
+                                            input#first_name.form-control.input-sm(type="text", name="first_name", placeholder="First Name..")
+                                    div.col-xs-6.col-sm-6.col-md-6
+                                        div.form-group
+                                            input#last_name.form-control.input-sm(type="text", name="last_name", placeholder="Last Name..")
+                                div.form-group
+                                    input#personal_number.form-control.input-sm(type="text", name="personal_number", placeholder="Personal Number..")
+                                div.form-group
+                                    input#university_card_number.form-control.input-sm(type="text", name="university_card_number", placeholder="Univerity Card Number")
+                                div.row
+                                    div.col-xs-6.col-sm-6.col-md-6
+                                        div.form-group
+                                            input#email.form-control.input-sm(type="text", name="email", placeholder="Email..")
+                                    div.col-xs-6.col-sm-6.col-md-6
+                                        div.form-group
+                                            input#phone_number.form-control.input-sm(type="text", name="phone_number", placeholder="Phone Number..")
+                                    div.col-xs-6.col-sm-6.col-md-6
+                                        div.form-group
+                                            input#user_name.form-control.input-sm(type="text", name="user_name", placeholder="User Name..")
+                                    div.col-xs-6.col-sm-6.col-md-6
+                                        div.form-group
+                                            input#password.form-control.input-sm(type="text", name="password", placeholder="Password..")
+                                div.form-group
+                                    input#password_repeat.form-control.input-sm(type="text", name="password_repeat", placeholder="Repeat Password..")
+                                input.btn.btn-info.btn-block(type="submit", value="Register" onclick="console.log('hejsan')")
+
+
