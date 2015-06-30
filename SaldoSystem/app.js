@@ -41,56 +41,77 @@ http.createServer(app).listen(app.get('port'), function () {
 /*
  * Global variables
  */
-var dbConnection = false;
-var db = mongodb.connect("mongodb://localhost:27017/kodmardenDB", function (err, db) {
-    dbConnection = true;
-    console.log("connection to database succeeded!");
+db = mongodb.connect("mongodb://localhost:27017/kodmardenDB", function (err, db) {
+    console.log("connection to kodmardenDB succeeded!");
+    test();
 });
 
-function User_Register() {
-    var register_input = [];
-    register_input[0] = document.getElementById("first_name");
-    register_input[1] = document.getElementById("last_name");
-    register_input[2] = document.getElementById("personal_number");
-    register_input[3] = document.getElementById("university_card_number");
-    register_input[4] = document.getElementById("email");
-    register_input[5] = document.getElementById("phone_number");
-    register_input[6] = document.getElementById("user_name");
-    register_input[7] = docuemnt.getElementById("password");
-    
-    console.log(register_input[0]);
-    if (Minimum_Input_Is_Valid(register_input) === true) {
-        db.collection("member").insert([
-            {
-                firstname: register_input[0].Text
-            }
-        ])
-    }
+app.post('/register', function (req, res) {
+    User_Register(req);
+});
+
+function test() {
+    console.log(db);
 }
 
-function Check_If_Minimum_Input_Is_Valid(register_input) {
-    
+function User_Register(req) {
+    var register_input = {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        personal_number: req.body.personal_number,
+        university_card_number: req.body.university_card_number,
+        email: req.body.email,
+        phone_number: req.body.phone_number,
+        user_name: req.body.user_name,
+        password: req.body.password
+    }
 
+    if (Minimum_Input_Is_Valid(register_input) === true) {
+        Database_Register_Insert();
+        console.log("Insert into database complete")
+    }
+    else {
+        console.log(db)
+        console.log("Need more input to form");
+    }
+
+}
+
+function Database_Register_Insert(register_input) {
+    db.collection("member").insert([
+        {
+            firstname: register_input.first_name,
+            lastname: register_input.last_name,
+            kiosk: [
+                {
+                    username: register_input.user_name,
+                    password: register_input.password,
+                    balance: 0
+                }
+            ],
+            personalnumber: register_input.personal_number,
+            unicardnumber: register_input.university_card_number,
+            email: register_input.email,
+            phone: register_input.phone_number,
+            registerdate: new Date()
+        }
+    ])
+}
+
+// if firstname, lastname, username or password isn't present false is returned. 
+// Also if both phonenumber and email ain't present false is returned. 
+function Minimum_Input_Is_Valid(register_input) {
+    
+    if (register_input.first_name == '' || register_input.last_name == '' ||
+        register_input.user_name == '' || register_input.password == '') {
+        return false;
+    }
+    
+    if (register_input.email == '' && register_input.phone_number == '') {
+        return false;
+    }
 
     return true;
 }
-/*db.collection("member").insert([
-        {
-            firstname: "Anton",
-            surname: "Oden",
-            kiosk: [
-                {
-                    username: "untslusk",
-                    password: "ruttenko",
-                    balance: 5000,
-                }
-            ],
-            personalnumber: "9309228436",
-            unicardnumber: "003057",
-            email: "antonoden@hotmail.com",
-            phone: "0768119444",
-            adress: "Jakthornsgatan 76 65632 Karlstad"
-        }
-    ]);*/
 
 
